@@ -258,16 +258,40 @@
                   </a>
                 </span>
 
-                <!-- TODO: Update with your arXiv paper ID -->
+                <!-- Hugging Face link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+                  <a href="https://huggingface.co/xiaorui638/flair" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
+                          alt="Hugging Face" style="height: 1em; vertical-align: middle;">
+                    </span>
+                    <span>FINER-Tuning</span>
+                  </a>
+                </span>
+
+                <!-- Hugging Face link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/xiaorui638/flair" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
+                          alt="Hugging Face" style="height: 1em; vertical-align: middle;">
+                    </span>
+                    <span>FINER-CompreCap</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/xiaorui638/flair" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
+                          alt="Hugging Face" style="height: 1em; vertical-align: middle;">
+                    </span>
+                    <span>FINER-DOCCI</span>
+                  </a>
+                </span>
             </div>
           </div>
         </div>
@@ -302,100 +326,101 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Blog-style content section -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Motivational Study</h2>
+    <p>We make mistakes in our daily life, and many times, the mistakes are so subtle and hard to be noticed when they co-appear with true statements. We wonder if MLLMs behave the same as a careless human, when false description embedded in correct statements, will the model still be able to say "No"? We therefore perform a motivational study. #TODO: rewrite and greatly improve the previous sentences. Summarize the results of motivational study based on the paper.</p>
+    
+    <figure>
+      <img src="static/images/motivational_study.png" alt="Descriptive alt text">
+      <figcaption>Figure 1. Motivational Study.</figcaption>
+    </figure>
+  </div>
+</section>
 
-<!-- Image carousel -->
+<!-- Blog-style content section -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">FINER-Benchmarks</h2>
+    <p>#TODO: breifly, vivdly introduce how we construct the finer benchmarks. Use simple and concise language, control your length, hopefully not more than 300 words.</p>
+    <figure>
+      <img src="static/images/FINER-benchmarks.png" alt="Descriptive alt text">
+      <figcaption>Figure 2.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Blog-style content section -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">FINER-Tuning</h2>
+    <p>#TODO: breifly, vivdly introduce how we construct FINER-Tuning. Use simple and concise language, no more than 300 words.</p>
+    <figure>
+      <img src="static/images/FINER-Tuning.png" alt="Descriptive alt text">
+      <figcaption>Figure 3.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Results on FINER-benchmarks</h2>
+    <p></p>
+  </div>
+</section>
+
+
+
+<!-- Image carousel 1-->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+        <!-- Your image here -->
+        <img src="static/images/FINER-benchmarks-results-tab.png" alt="MY ALT TEXT"/>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
+        <img src="static/images/FINER-benchmarks-results-fig.png" alt="MY ALT TEXT"/>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
   </div>
 </div>
 </div>
 </section>
-<!-- End image carousel -->
+<!-- End image carousel 1-->
 
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Results on general hallucination benchmarks</h2>
+    <p>
+      We escitedly found that FINER-Tuning can generalize: by optimizing towards FINER, FINER-Tuning brings performance gains on other hallucination benchmarks as well.
+    </p>
+  </div>
+</section>
 
-<!-- Video carousel -->
+<!-- Image carousel 2-->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/Other_hallu_tab_1.png" alt="MY ALT TEXT"/>
       </div>
-    </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/Other_hallu_tab_2.png" alt="MY ALT TEXT"/>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/Other_hallu_tab_3.png" alt="MY ALT TEXT"/>
+     </div>
   </div>
+</div>
+</div>
 </section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
 
 
 
