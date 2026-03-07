@@ -199,46 +199,52 @@
                 </span>
 
                 <span class="link-block">
-                  <a href="https://github.com/ExplainableML/finer" target="_blank"
-                     class="external-link button is-normal is-rounded is-dark">
+                  <span class="external-link button is-normal is-rounded is-dark disabled-button" aria-disabled="true">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
                     <span>Code</span>
-                  </a>
+                  </span>
                 </span>
 
                 <span class="link-block">
-                  <a href="https://huggingface.co/YOUR_FINER_TUNING_MODEL" target="_blank"
-                     class="external-link button is-normal is-rounded is-dark">
+                  <span class="external-link button is-normal is-rounded is-dark disabled-button" aria-disabled="true">
+                    <span class="icon">
+                      <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
+                           alt="Hugging Face" style="height: 1em; vertical-align: middle;">
+                    </span>
+                    <span>Models</span>
+                  </span>
+                </span>
+
+                <span class="link-block">
+                  <span class="external-link button is-normal is-rounded is-dark disabled-button" aria-disabled="true">
                     <span class="icon">
                       <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
                            alt="Hugging Face" style="height: 1em; vertical-align: middle;">
                     </span>
                     <span>FINER-Tuning</span>
-                  </a>
+                  </span>
                 </span>
 
                 <span class="link-block">
-                  <a href="https://huggingface.co/YOUR_FINER_COMPRECAP_DATASET" target="_blank"
-                     class="external-link button is-normal is-rounded is-dark">
+                  <span class="external-link button is-normal is-rounded is-dark disabled-button" aria-disabled="true">
                     <span class="icon">
                       <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
                            alt="Hugging Face" style="height: 1em; vertical-align: middle;">
                     </span>
                     <span>FINER-CompreCap</span>
-                  </a>
+                  </span>
                 </span>
 
                 <span class="link-block">
-                  <a href="https://huggingface.co/YOUR_FINER_DOCCI_DATASET" target="_blank"
-                     class="external-link button is-normal is-rounded is-dark">
+                  <span class="external-link button is-normal is-rounded is-dark disabled-button" aria-disabled="true">
                     <span class="icon">
                       <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" 
                            alt="Hugging Face" style="height: 1em; vertical-align: middle;">
                     </span>
                     <span>FINER-DOCCI</span>
-                  </a>
+                  </span>
                 </span>
               </div>
             </div>
@@ -397,7 +403,7 @@
         Hallucination reduction often comes with an alignment tax, where gains on the target task hurt general ability. FINER-Tuning avoids this trade-off. On six general-purpose multimodal benchmarks, it maintains or improves the performance of strong base models, including gains on MMStar, MMVP, NaturalBench, and V* Bench. For InternVL3.5-14B, the average score improves by <strong>1.4%</strong>. This suggests that FINER provides a useful training signal that complements, rather than damages, a model’s broader multimodal capabilities.
       </p>
       <figure>
-        <img class="general-figure" src="static/images/General_cap_tab.png" alt="Motivational study showing performance under increasingly fine-grained negative queries">
+        <img class="general-figure" src="static/images/General_cap_tab.png" alt="Results on general multimodal capabilities">
         <figcaption>Figure 4. Results on general capabilities.</figcaption>
       </figure>
     </div>
@@ -413,12 +419,11 @@
           <span class="copy-text">Copy</span>
         </button>
       </div>
-      <pre id="bibtex-code"><code>@misc{xiao2026finer,
+      <pre id="bibtex-code"><code>@inproceedings{xiao2026finer,
   title={FINER: MLLMs Hallucinate under Fine-grained Negative Queries},
-  author={Rui Xiao and Sanghwan Kim and Yongqin Xian and Zeynep Akata and Stephan Alaniz},
-  year={2026},
-  note={Computer Vision and Pattern Recognition (CVPR)},
-  url={https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE}
+  author={Xiao, Rui and Kim, Sanghwan and Xian, Yongqin and Akata, Zeynep and Alaniz, Stephan},
+  journal={CVPR},
+  year={2026}
 }</code></pre>
     </div>
   </section>
