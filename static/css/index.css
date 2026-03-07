@@ -38,6 +38,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.motivation-figure {
+  display: block;
+  max-width: 50%;
+  height: auto;
+  margin: 0 auto;
+}
 
 /* Modern Button Styles */
 .button {
