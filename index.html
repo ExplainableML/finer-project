@@ -398,6 +398,34 @@
 
   <section class="section">
     <div class="container is-max-desktop content">
+      <h2 class="title is-3">Ablation Studies</h2>
+      <p>
+        We conduct two ablation studies to understand what drives FINER-Tuning. First, we ablate the <strong>training strategy</strong> by comparing DPO against SFT, and by training with only negative queries versus both positive and negative queries. The results show that SFT is unstable and can even hurt performance, while DPO is consistently stronger. In particular, training with both positive and negative queries gives the best overall results, showing that FINER-Tuning benefits from learning both to confirm correct statements and to reject subtle false ones. Second, we ablate <strong>training subset selection</strong> by training on only one subset at a time: Multi-obj, Multi-attr, Multi-rel, or Wh. Models trained on a single subset perform best on their matching test setting, but still transfer somewhat to other settings. However, training on all subsets gives the most balanced performance overall, suggesting that FINER-Tuning learns a broader fine-grained rejection capability rather than overfitting to one query type.
+      </p>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel-finer" class="carousel results-carousel">
+          <div class="item">
+            <div class="carousel-image-wrap">
+              <img src="static/images/Ablation_tab_1.png" alt="First ablation study table"/>
+            </div>
+          </div>
+          <div class="item">
+            <div class="carousel-image-wrap">
+              <img src="static/images/Ablation_tab_2.png" alt="Second ablation study table"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop content">
       <h2 class="title is-3">Results on General Multimodal Capabilities</h2>
       <p>
         Hallucination reduction often comes with an alignment tax, where gains on the target task hurt general ability. FINER-Tuning avoids this trade-off. On six general-purpose multimodal benchmarks, it maintains or improves the performance of strong base models, including gains on MMStar, MMVP, NaturalBench, and V* Bench. For InternVL3.5-14B, the average score improves by <strong>1.4%</strong>. This suggests that FINER provides a useful training signal that complements, rather than damages, a model’s broader multimodal capabilities.

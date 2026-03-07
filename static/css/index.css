@@ -218,6 +218,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
 .publication-venue {
   color: var(--text-secondary);
   width: fit-content;
