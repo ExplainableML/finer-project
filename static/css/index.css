@@ -45,9 +45,10 @@ body {
   margin: 0 auto;
 }
 
-.results-carousel .item img {
+#results-carousel-finer .item img,
+#results-carousel-hallu .item img {
   display: block;
-  width: 75%;
+  width: 60%;
   height: auto;
   margin: 0 auto;
 }
