@@ -78,6 +78,41 @@ body {
   transform: none !important;
 }
 
+.ablation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.ablation-item {
+  margin: 0;
+  text-align: center;
+}
+
+.ablation-item img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.ablation-item figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+@media screen and (max-width: 768px) {
+  .ablation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* Shared spacing for both <a> and <span> buttons */
 .link-block {
   display: inline-block;
