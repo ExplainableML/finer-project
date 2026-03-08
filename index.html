@@ -278,7 +278,7 @@
         We begin with a simple question: can MLLMs still reject a false statement when most of the query is correct? To test this, we progressively make negative queries more fine-grained. Starting from a single wrong object, we then add correct attributes and relations, so that each query contains only one contradiction while the rest remains visually consistent. This gives seven levels of granularity, from coarse to fine.
       </p>
       <p>
-        The trend is striking. As the query becomes more detailed, the base model becomes much more likely to answer “Yes” to claims that should be rejected. For InternVL3.5-14B, accuracy drops from around 80% to around 20% on FINER-CompreCap, and from around 58% to around 15% on FINER-DOCCI. In other words, subtle mistakes hidden inside otherwise correct descriptions are much harder for MLLMs to detect. FINER-Tuning noticeably improves this behavior, especially at the finest levels, motivating the need for benchmarks and training data that specifically target fine-grained hallucinations.
+        The trend is striking. As the query becomes more detailed, the base model becomes much more likely to answer “Yes” to claims that should be rejected (false-positive hallucinations). For InternVL3.5-14B, accuracy drops from around 80% to around 20% on FINER-CompreCap, and to around 15% on FINER-DOCCI. In other words, subtle mistakes hidden inside otherwise correct descriptions are much harder for MLLMs to detect. FINER-Tuning noticeably improves this behavior, especially at the finest levels, motivating the need for benchmarks and training data that specifically target fine-grained hallucinations.
       </p>
       
       <figure>
@@ -295,10 +295,10 @@
         FINER is built to test whether an MLLM can spot a small mistake hidden inside a detailed query. We start from a scene graph containing objects, attributes, and relations. For each element, we generate several plausible but incorrect alternatives, such as replacing an object, changing a color, or modifying a relation. We then compose both positive and negative questions from these scene graphs.
       </p>
       <p>
-        The benchmark contains four settings. <strong>Multi-obj</strong> checks whether the model can detect one wrong object among several correct ones. <strong>Multi-attr</strong> does the same for attributes. <strong>Multi-rel</strong> focuses on relations. <strong>Wh</strong> asks open-form “what” questions with one incorrect attribute embedded in the query. Instead of simple yes/no evaluation, FINER uses multiple-choice questions, forcing the model to identify the correct visual content rather than relying on answer bias.
+        The benchmark contains four settings. <strong>Multi-obj</strong> checks whether the model can detect one wrong object among several correct ones. <strong>Multi-attr</strong> does the same for attributes. <strong>Multi-rel</strong> focuses on relations. <strong>Wh</strong> asks “what” questions with one incorrect attribute embedded in the query. Instead of simple yes/no evaluation, FINER uses multiple-choice questions, forcing the model to identify the correct visual content.
       </p>
       <p>
-        We release two benchmark variants. <strong>FINER-CompreCap</strong> is built from CompreCap scene graphs. <strong>FINER-DOCCI</strong> is built from DOCCI captions, where we extract scene-graph-like annotations with Gemini, filter them with Qwen2.5-VL-72B, and verify samples with humans. Overall, the two benchmarks cover tens of thousands of MCQs and systematically probe fine-grained hallucinations beyond coarse object-level mismatches.
+        We release two benchmark variants. <strong>FINER-CompreCap</strong> is built from CompreCap scene graphs. <strong>FINER-DOCCI</strong> is built from dense DOCCI captions, where we extract synthetic scene-graph-like annotations with Gemini, filter them with Qwen2.5-VL-72B, and human verification to specify filtering thresholds. Overall, the two benchmarks cover tens of thousands of MCQs and aim to systematically probe fine-grained hallucinations beyond coarse object-level mismatches with their scales.
       </p>
       <figure>
         <img src="static/images/FINER-benchmarks.png" alt="Pipeline for constructing the FINER benchmarks">
@@ -366,7 +366,7 @@
         A key question is whether training on FINER only helps on FINER itself, or whether it generalizes to broader hallucination evaluation. Encouragingly, FINER-Tuning transfers well. Across eight existing hallucination benchmarks, it consistently improves Qwen2.5-VL and InternVL3.5 on both discriminative and generative settings. On DASH, for instance, it improves the two InternVL3.5 variants by 6.2% and 5.5%, and it also lowers hallucination on MMHal-Bench and improves scores on HaloQuest.
       </p>
       <p>
-        This matters because FINER-Tuning is not optimized for a single narrow benchmark. Instead, it teaches models to detect subtle contradictions in queries, and this stronger discrimination ability carries over to other hallucination suites as well.
+        This matters because FINER-Tuning is not aimed just for a single narrow benchmark. Instead, it teaches models to detect subtle contradictions in queries, and this stronger discrimination ability carries over to other hallucination suites as well.
       </p>
     </div>
   </section>
@@ -413,7 +413,8 @@
     <div class="container is-max-desktop content">
       <h2 class="title is-3">Ablation Studies</h2>
       <p>
-        We conduct two ablation studies to understand what drives FINER-Tuning. First, we ablate the <strong>training strategy</strong> by comparing DPO against SFT, and by training with only negative queries versus both positive and negative queries. The results show that SFT is unstable and can even hurt performance, while DPO is consistently stronger. In particular, training with both positive and negative queries gives the best overall results, showing that FINER-Tuning benefits from learning both to confirm correct statements and to reject subtle false ones. Second, we ablate <strong>training subset selection</strong> by training on only one subset at a time: Multi-obj, Multi-attr, Multi-rel, or Wh. Models trained on a single subset perform best on their matching test setting, but still transfer somewhat to other settings. However, training on all subsets gives the most balanced performance overall, suggesting that FINER-Tuning learns a broader fine-grained rejection capability rather than overfitting to one query type.
+        We conduct two ablation studies to understand what drives FINER-Tuning. First, we ablate the <strong>training strategy</strong> by comparing DPO against SFT, and by training with only negative queries versus both positive and negative queries. Interestingly, the results show that SFT can even hurt performance, while DPO is consistently stronger. In particular, training with both positive and negative queries gives the best overall results, showing that FINER-Tuning benefits from learning both to confirm correct statements and to reject subtle false ones. Second, we ablate <strong>training subset selection</strong> by training on only one subset at a time: Multi-obj, Multi-attr, Multi-rel, or Wh. Models trained on a single subset perform best on their matching test setting, but still transfer somewhat to other settings. However, training on all subsets gives the most balanced performance overall, suggesting that FINER-Tuning learns a broader fine-grained rejection capability rather than overfitting to one query type.
+        We have also included a series of extra ablation studies in the supplementary material.
       </p>
     </div>
   </section>
@@ -474,7 +475,7 @@
   <div class="container is-max-desktop content">
     <h2 class="title is-3">Limitations and Future Work</h2>
     <p>
-      FINER still has several limitations. Although we include human filtering, the scale of the benchmarks, especially FINER-DOCCI, makes full manual curation impractical. As a result, some samples may still contain annotation errors or ambiguous cases. In addition, our current multi-relation setting is limited to at most three relations, which does not yet capture richer relational compositions that appear in real-world scenes.
+      FINER still has several limitations. Although we include human filtering, the scale of the benchmarks, especially FINER-DOCCI, makes full manual curation impractical. As a result, some samples may still contain annotation errors or ambiguous cases (we will provide more detailed visualizations later). In addition, our current multi-relation setting is limited to at most three relations, which does not yet capture richer relational compositions that appear in real-world scenes.
     </p>
     <p>
       A natural next step is to build a larger and more challenging version of FINER with more objects, attributes, and relations per image, while increasing the level of human validation. We view FINER as a starting point for studying hallucinations hidden inside fine-grained queries, and hope it encourages broader work in this direction. Looking ahead, we believe the same idea can be extended beyond general-domain vision-language benchmarks to high-stakes settings such as medicine, finance, and law, where even subtle fine-grained errors can be costly.
