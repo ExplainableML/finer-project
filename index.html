@@ -189,7 +189,7 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://arxiv.org/pdf/<ARXIV_PAPER_ID>.pdf" target="_blank"
+                  <a href="https://arxiv.org/pdf/2603.17662v1" target="_blank"
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -268,7 +268,7 @@
     <div class="container is-max-desktop content">
       <h2 class="title is-3">Motivational Study</h2>
       <p>
-        We observe an underexplored failure mode of frontier MLLMs: like careless humans, they overlook incorrect details hidden within long queries. We term such cases <strong>Fine-grained Negative Queries (FINER)</strong>. As a motivational study, we construct FINER with seven levels of increasing granularity and probe InternVL-3.5 with yes-or-no questions, where the correct answer is always “No.” We then compare the base model with our fine-tuned version after <strong>FINER-Tuning</strong>.
+        We observe an underexplored failure mode for frontier MLLMs: like careless humans, they overlook incorrect details hidden within long queries. We term such cases <strong>Fine-grained Negative Queries (FINER)</strong>. As a motivational study, we construct FINER with seven levels of increasing granularity and probe InternVL-3.5 with yes-or-no questions, where the correct answer is always “No.” We then compare the base model with our fine-tuned version after <strong>FINER-Tuning</strong>.
       </p>
       <p>
         The trend is striking. As the query becomes more detailed, the base model becomes much more likely to answer “Yes” to claims that should be rejected (false-positive hallucinations). For InternVL3.5-14B, accuracy drops from around 80% to around 20% on FINER-CompreCap, and to around 15% on FINER-DOCCI. In other words, subtle mistakes hidden inside otherwise correct descriptions are much harder for MLLMs to detect. FINER-Tuning noticeably improves this behavior, especially at the finest levels, motivating the need for benchmarks and training data that specifically target fine-grained hallucinations.
@@ -285,10 +285,11 @@
     <div class="container is-max-desktop content">
       <h2 class="title is-3">FINER-Benchmarks</h2>
       <p>
-        FINER is built to test whether an MLLM can spot a small mistake hidden inside a detailed query. We start from a scene graph containing objects, attributes, and relations. For each element, we generate several plausible but incorrect alternatives, such as replacing an object, changing a color, or modifying a relation. We then compose both positive and negative questions from these scene graphs.
+        FINER benchmarks are built to test whether an MLLM can spot such queries. We start from a scene graph containing objects, attributes, and relations. For each element, we generate several plausible but incorrect alternatives, such as replacing an object, changing a color, or modifying a relation. We then compose both positive and negative questions from these scene graphs.
       </p>
       <p>
-        Both <strong>FINER-CompreCap</strong> and <strong>FINER-DOCCI</strong> contain four settings. <strong>Multi-obj</strong> checks whether the model can detect one wrong object among several correct ones. <strong>Multi-attr</strong> does the same for attributes. <strong>Multi-rel</strong> focuses on relations. <strong>Wh</strong> asks “what” questions with one incorrect attribute embedded in the query. Instead of simple yes/no evaluation, FINER uses multiple-choice questions, this is driven by two motivations, first we want the model to reason beyond simple yes-or-no, second by embedding the ground-truth into the choices, the model could compare and choose the best answer, decreasing ambiguity issues.
+        Both <strong>FINER-CompreCap</strong> and <strong>FINER-DOCCI</strong> include four settings. <strong>Multi-obj</strong> tests whether a model can detect one incorrect object among several correct ones. <strong>Multi-attr</strong> applies the same idea to attributes. <strong>Multi-rel</strong> focuses on relations. <strong>Wh</strong> presents “what” questions in which one incorrect attribute is embedded in the query. 
+        Instead of simple yes/no evaluation, FINER uses multiple-choice questions for two reasons. First, we want the model to perform more than a binary yes-or-no judgment. Second, by including the ground-truth answer among the choices, the model can compare the options and select the best one, which helps reduce ambiguity in fine-grained scenario.     
       </p>
       <p>
         We perform human-in-the-loop filtering for the two benchmarks, since full human inspection is not possible at this scale. For one positive entity, we generate four negatives. We then apply Qwen2.5-VL-72B to classify the positive out from the negatives. If successful, then we keep all negatives. If the classification failed, we inspect the decision entropies. If entropies are low (the model is very certain at certain negatives, likely indicating that they are actually inside the image), we rewrite the negatives with Gemini again. Human verification is performed on small subset of samples to specify the filtering threshold.
@@ -471,15 +472,15 @@
   <div class="container is-max-desktop content">
     <h2 class="title is-3">Limitations and Future Work</h2>
     <p>
-      FINER still has several limitations. Although we include human-in-the-loop filtering, the scale of the benchmarks, especially FINER-DOCCI, makes full manual curation impractical. As a result, some samples may still contain annotation errors or ambiguous cases (we will provide more detailed visualizations later). In addition, our current multi-relation setting is limited to at most three relations, which does not yet capture richer relational compositions that appear in real-world scenes.
+      FINER still has several limitations. Although we include careful human-in-the-loop filtering, the scale of the benchmarks, especially FINER-DOCCI, makes full manual curation impractical. As a result, some samples may still contain annotation errors or ambiguous cases. In addition, our current multi-relation setting is limited to at most three relations, which does not yet capture richer relational compositions that appear in real-world scenes.
     </p>
     <p>
       <p>
-        We recommend using FINER-CompreCap as the primary benchmark for evaluating fine-grained hallucination. It has more controlled annotations and lower noise. FINER-DOCCI is provided as an exploratory large-scale benchmark that extends FINER to open-set scenarios and we mainly aim to test if our findings still hold at scale. Due to the significantly larger scale and the open-set nature of the annotations, its labels may contain more noise. We are still working on to improve FINER benchmarks, and we think a benchmark with full human validation should indeed be the future direction.
+        We recommend using FINER-CompreCap as the primary benchmark for evaluation. It has more controlled annotations and enables faster inference. FINER-DOCCI is provided as an exploratory large-scale trial that extends FINER to open-set scenarios and we mainly aim to test if our findings still hold at scale. Due to the significantly larger scale and the open-set nature of the annotations, its labels may contain more noise. We are still working on to improve FINER benchmarks by curating a fully human validated benchmark with scaled-up number of objects/attributes/relations.
       </p>
     </p>
     <p>
-      A natural next step is to build a larger and more challenging version of FINER with more objects, attributes, and relations per image, while increasing the level of human validation. We view FINER as a starting point for studying hallucinations hidden inside fine-grained queries, and hope it encourages broader work in this direction. Looking ahead, we believe the same idea can be extended beyond general-domain vision-language benchmarks to high-stakes settings such as medicine, finance, and law, where even subtle fine-grained errors can be costly.
+       We view FINER as a starting point for studying hallucinations hidden inside fine-grained queries, and hope it encourages broader work in this direction. Looking ahead, we believe the same idea can be extended beyond general-domain vision-language benchmarks to high-stakes settings such as medicine, finance, and law, where even subtle fine-grained errors can be costly.
     </p>
   </div>
 </section>
