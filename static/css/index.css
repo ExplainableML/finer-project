@@ -291,13 +291,14 @@ body {
   position: relative;
 }
 
-.publication-venue {
-  margin-top: 0.75rem;
+.conference-line {
+  margin-top: -0.75rem;
   margin-bottom: 1.25rem;
   font-size: 1.15rem;
   font-weight: 700;
   color: #e74c3c;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .publication-authors a::after {
